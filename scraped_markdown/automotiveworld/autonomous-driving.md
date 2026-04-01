@@ -6,8 +6,6 @@ description: In-depth coverage of self-driving technologies, ADAS development, r
 sitename: Automotive World
 date: 2026-04-01
 ---
-April 1, 2026
-
 Latest:
 
 April 1, 2026
@@ -31,8 +29,6 @@ March 26, 2026
 March 26, 2026
 
 March 26, 2026
-
-March 25, 2026
 
 March 25, 2026
 

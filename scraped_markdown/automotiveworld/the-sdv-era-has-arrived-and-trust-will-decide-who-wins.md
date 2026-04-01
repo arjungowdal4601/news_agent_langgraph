@@ -16,7 +16,7 @@ Over-the-air (OTA) software updates have fundamentally altered the relationship 
 
 The next phase is already underway. The industry is moving from isolated, domain-level updates towards whole-vehicle orchestration. Fully realised SDVs leverage zonal E/E architectures and centralised computing to manage vehicle behaviour by policy rather than component. A single software update can recalibrate braking behaviour, adjust suspension characteristics, modify ADAS performance and enable new features simultaneously. OEMs are at different stages of implementation, but the impact is already clear to see in investment decisions, operating models and commercial priorities.
 
-![](https://media.automotiveworld.com/app/uploads/2025/04/30154305/polestar-showroom-portugal-scaled-e1774947274768.jpg)
+![](https://www.automotiveworld.com/app/uploads/2025/04/polestar-showroom-portugal-scaled-e1760438181780-1024x555.jpg)
 
 ## When software risk becomes physical risk
 

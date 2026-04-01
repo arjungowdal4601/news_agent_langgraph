@@ -5,7 +5,7 @@ url: https://www.automotiveworld.com/news/volvo-trucks-begins-road-testing-hydro
 hostname: automotiveworld.com
 description: Volvo Trucks has started on-road testing of hydrogen combustion engine trucks using HPDI technology, with a commercial launch planned before 2030
 sitename: Automotive World
-date: 2026-03-31
+date: 2026-04-01
 categories: ['Commercial Vehicle', 'E-Mobility', 'News', 'OEMs']
 ---
 Volvo Trucks has begun on-road testing of heavy trucks powered by hydrogen combustion engines, with a commercial launch planned before 2030. The vehicles use High Pressure Direct Injection (HPDI) technology developed by Cespira, in which a small amount of ignition fuel is injected at high pressure to enable compression ignition before hydrogen is introduced — an approach Volvo already applies in its gas-powered trucks, of which more than 10,000 units have been sold globally.

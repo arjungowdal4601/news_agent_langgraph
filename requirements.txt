@@ -1,0 +1,9 @@
+langchain-core
+langchain-openai
+langgraph
+openpyxl
+pydantic
+python-dotenv
+requests
+trafilatura
+typing_extensions

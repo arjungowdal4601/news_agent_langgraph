@@ -5,7 +5,7 @@ url: https://www.automotiveworld.com/news/audi-introduces-torque-vectoring-world
 hostname: automotiveworld.com
 description: Audi's new RS 5 uses electromechanical torque vectoring at the rear axle, which Audi says is a world first in a production vehicle
 sitename: Automotive World
-date: 2026-03-31
+date: 2026-04-01
 categories: ['E-Mobility', 'News', 'OEMs']
 ---
 Audi has introduced electromechanical torque vectoring at the rear axle of the new RS 5, which the automaker describes as a world first in a production model. The system, called quattro with Dynamic Torque Control, forms part of a modular plug-in hybrid drivetrain and can distribute torque differences of up to 2,000 Nm between the rear wheels in 15 milliseconds, operating independently of drivetrain load.

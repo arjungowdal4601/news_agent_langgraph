@@ -4,13 +4,11 @@ url: https://www.automotiveworld.com/topics/e-mobility/
 hostname: automotiveworld.com
 description: Comprehensive coverage of EVs, battery technology, charging infrastructure, policy, and the market dynamics accelerating the e-mobility transition.
 sitename: Automotive World
-date: 2026-03-31
+date: 2026-04-01
 ---
-March 31, 2026
-
 Latest:
 
-March 31, 2026
+April 1, 2026
 
 March 31, 2026
 
@@ -39,8 +37,6 @@ March 31, 2026
 March 31, 2026
 
 March 31, 2026
-
-March 30, 2026
 
 2nd April
 
