@@ -11,7 +11,6 @@ from nodes.semantic_router_nodes import semantic_router_from_excel
 from nodes.sitemap_nodes import download_xml, extract_urls_to_excel
 from state import PipelineState
 
-
 builder = StateGraph(PipelineState)
 
 # Add nodes.
@@ -29,12 +28,11 @@ builder.add_edge("semantic_router_from_excel", END)
 
 graph = builder.compile()
 
-
 if __name__ == "__main__":
     result = graph.invoke(
         {
             "base_url": "https://www.automotiveworld.com/",
-            "cutoff_date": "2026-03-25",
+            "cutoff_date": "2026-03-28",
             "user_need": USER_NEED,
         }
     )
