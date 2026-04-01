@@ -7,9 +7,18 @@ Assign a similarity score from 0 to 100.
 Decide selected true or false.
 Return one short reason.
 Do not invent facts.
-Judge only from the provided markdown.
+Judge the cleaned article body, not just title keywords or metadata.
+Treat title, description, and source URL as context only.
+Hard negatives that must score low and never be selected:
+- topic pages
+- category pages
+- landing pages
+- listing or index pages
+- webinar or event promotion pages
+- pages that are mostly dates, metadata, navigation, or article lists
+- pages with little or no real article narrative
+The reason must point to body evidence, not just topic words in the title or description.
 """
-
 
 SEMANTIC_ROUTER_HUMAN_MESSAGE = """User need:
 {user_need}
@@ -17,8 +26,14 @@ SEMANTIC_ROUTER_HUMAN_MESSAGE = """User need:
 Source URL:
 {source_url}
 
-Markdown content:
-{markdown_content}
+Title:
+{article_title}
+
+Description:
+{article_description}
+
+Cleaned article body:
+{article_body}
 """
 
 
@@ -52,6 +67,10 @@ What does NOT count as relevant:
 - ordinary infotainment or feature updates unless they reflect a deeper architecture or engineering shift
 - routine EV/ADAS coverage without meaningful technical depth
 - vehicle reviews, first drives, comparisons, or buying advice
+- topic pages, category pages, landing pages, article index pages, and article list pages
+- webinar/event promotion pages or newsletter signup/form pages
+- pages dominated by dates, schedule blocks, metadata, teaser blurbs, or navigation labels
+- pages where the body does not contain a substantive article narrative
 
 Scoring guide:
 - 0 to 20: irrelevant to automotive R&D
@@ -61,7 +80,7 @@ Scoring guide:
 - 81 to 100: strongly relevant, high-signal engineering/R&D article
 
 Selection rule:
-- selected = true only if the article is meaningfully useful for automotive R&D or engineering-focused reporting score id above 70
+- selected = true only if the article body itself is meaningfully useful for automotive R&D or engineering-focused reporting and the score is above 70
 - selected = false otherwise
 
 Return:

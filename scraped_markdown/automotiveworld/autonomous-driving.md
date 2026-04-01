@@ -30,8 +30,6 @@ March 26, 2026
 
 March 26, 2026
 
-March 25, 2026
-
 2nd April
 
 10am Stuttgart | 1:30pm Mumbai | 4am Detroit

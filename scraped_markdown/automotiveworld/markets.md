@@ -6,13 +6,11 @@ description: Coverage of global automotive markets, tracking sales performance, 
 sitename: Automotive World
 date: 2026-04-01
 ---
-April 1, 2026
-
 Latest:
 
 April 1, 2026
 
-March 31, 2026
+April 1, 2026
 
 March 31, 2026
 
@@ -31,10 +29,6 @@ March 31, 2026
 March 31, 2026
 
 March 31, 2026
-
-March 31, 2026
-
-March 30, 2026
 
 2nd April
 

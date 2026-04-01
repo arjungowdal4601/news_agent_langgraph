@@ -6,10 +6,14 @@ description: Insight into automotive production strategy, plant operations, supp
 sitename: Automotive World
 date: 2026-04-01
 ---
-March 31, 2026
+April 1, 2026
 
 Latest:
 
+April 1, 2026
+
+April 1, 2026
+
 March 31, 2026
 
 March 31, 2026
@@ -31,10 +35,6 @@ March 30, 2026
 March 30, 2026
 
 March 30, 2026
-
-March 27, 2026
-
-March 27, 2026
 
 March 27, 2026
 

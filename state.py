@@ -10,3 +10,4 @@ class PipelineState(TypedDict, total=False):
     # File paths created by nodes
     xml_file_path: str
     excel_file_path: str
+    final_markdown_file_path: str

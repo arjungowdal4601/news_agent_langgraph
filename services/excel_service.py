@@ -73,6 +73,16 @@ def update_semantic_reason(worksheet, row_number: int, column: int, value: str) 
     worksheet.cell(row=row_number, column=column, value=value)
 
 
+def update_final_markdown_path(worksheet, row_number: int, column: int, value: str) -> None:
+    """Write the final newsletter markdown path for a row."""
+    worksheet.cell(row=row_number, column=column, value=value)
+
+
+def update_final_markdown_status(worksheet, row_number: int, column: int, value: str) -> None:
+    """Write the final newsletter composition status for a row."""
+    worksheet.cell(row=row_number, column=column, value=value)
+
+
 def save_workbook(workbook: Workbook, excel_path: Path) -> None:
     """Persist workbook updates after each row."""
     workbook.save(excel_path)

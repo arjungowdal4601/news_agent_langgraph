@@ -6,29 +6,21 @@ description: Breaking news and daily coverage of the automotive industry, tracki
 sitename: Automotive World
 date: 2026-04-01
 ---
-April 1, 2026
-
 Latest:
 
 April 1, 2026
 
 April 1, 2026
 
-March 31, 2026
+April 1, 2026
 
-March 31, 2026
+April 1, 2026
 
-March 31, 2026
+April 1, 2026
 
-March 31, 2026
+April 1, 2026
 
-March 31, 2026
-
-March 31, 2026
-
-March 31, 2026
-
-March 31, 2026
+April 1, 2026
 
 2nd April
 
