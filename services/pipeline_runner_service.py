@@ -1,5 +1,8 @@
 from typing import Any, Iterable
 
+from langchain_core.runnables.graph import MermaidDrawMethod
+from langchain_core.runnables.graph_mermaid import draw_mermaid_png
+
 from constants import GRAPH_OUTPUT_DIR
 from services.path_service import get_site_name
 
@@ -29,10 +32,24 @@ def get_graph_mermaid_text(graph: Any) -> str:
 
 
 def save_langgraph_diagram(graph: Any, site_name: str) -> str:
-    """Save a Mermaid flow diagram for the current LangGraph pipeline."""
+    """Save a PNG flow diagram for the current LangGraph pipeline."""
     GRAPH_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    diagram_path = GRAPH_OUTPUT_DIR / f"{site_name}_langgraph_flow.mmd"
-    diagram_path.write_text(get_graph_mermaid_text(graph), encoding="utf-8")
+    diagram_path = GRAPH_OUTPUT_DIR / f"{site_name}_langgraph_flow.png"
+
+    try:
+        graph.get_graph().draw_mermaid_png(
+            output_file_path=str(diagram_path),
+            draw_method=MermaidDrawMethod.API,
+            background_color="white",
+        )
+    except Exception:
+        draw_mermaid_png(
+            get_graph_mermaid_text(graph),
+            output_file_path=str(diagram_path),
+            draw_method=MermaidDrawMethod.API,
+            background_color="white",
+        )
+
     return str(diagram_path.resolve())
 
 

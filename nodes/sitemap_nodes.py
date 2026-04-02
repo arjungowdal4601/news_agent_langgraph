@@ -23,6 +23,17 @@ def download_xml(state: PipelineState) -> dict:
     file_path = DOWNLOAD_DIR / f"{site_name}.xml"
 
     response = requests.get(sitemap_url, headers=HEADERS, timeout=30)
+
+    if response.status_code == 403:
+        server_name = response.headers.get("server", "unknown")
+        raise requests.HTTPError(
+            "403 Forbidden while downloading sitemap. "
+            f"The site blocked this machine at {sitemap_url} "
+            f"(server: {server_name}). "
+            "This is typically an anti-bot or IP-level block, not a sitemap path issue.",
+            response=response,
+        )
+
     response.raise_for_status()
 
     file_path.write_bytes(response.content)
