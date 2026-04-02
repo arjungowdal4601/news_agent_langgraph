@@ -11,6 +11,7 @@ from constants import DEFAULT_OPENAI_MODEL
 from prompts.final_markdown_prompts import FINAL_MARKDOWN_PROMPT
 
 MARKDOWN_BULLET_RE = re.compile(r"^(?:[-*]\s+\S|\d+\.\s+\S)")
+MARKDOWN_HEADING_RE = re.compile(r"^#{1,6}\s+\S")
 
 
 class FinalMarkdownArticleResult(BaseModel):
@@ -88,9 +89,6 @@ def clean_final_markdown_body(markdown_body: str) -> str:
     while lines and not lines[0].strip():
         lines.pop(0)
 
-    if lines and re.match(r"^#{1,2}\s+", lines[0].strip()):
-        lines.pop(0)
-
     return "\n".join(lines).strip()
 
 
@@ -123,6 +121,28 @@ def has_markdown_bullets(markdown_body: str) -> bool:
     return any(MARKDOWN_BULLET_RE.match(line.strip()) for line in markdown_body.splitlines())
 
 
+def contains_markdown_heading(markdown_body: str) -> bool:
+    """Return True when the markdown body contains internal headings."""
+    return any(MARKDOWN_HEADING_RE.match(line.strip()) for line in markdown_body.splitlines())
+
+
+def contains_disallowed_prose(markdown_body: str) -> bool:
+    """Return True when non-bullet prose blocks are present in the markdown body."""
+    for line in markdown_body.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        if (
+            MARKDOWN_BULLET_RE.match(stripped)
+            or stripped.startswith("![")
+            or stripped.lower().startswith("source:")
+            or line.startswith("  ")
+        ):
+            continue
+        return True
+    return False
+
+
 def build_article_payload(article: dict) -> dict:
     """Build one prompt payload item with preservation requirements."""
     markdown_content = article["markdown_content"]
@@ -140,6 +160,10 @@ def validate_final_markdown_body(article_input: dict, markdown_body: str) -> str
     cleaned_body = clean_final_markdown_body(markdown_body)
     if not has_markdown_bullets(cleaned_body):
         raise ValueError("The composed article body did not contain Markdown bullet points.")
+    if contains_markdown_heading(cleaned_body):
+        raise ValueError("The composed article body contained internal headings.")
+    if contains_disallowed_prose(cleaned_body):
+        raise ValueError("The composed article body contained paragraph-style prose blocks.")
 
     normalized_output_lines = {
         normalize_markdown_line(line)
