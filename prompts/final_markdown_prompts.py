@@ -9,7 +9,9 @@ You will receive a batch of article markdown files.
 For each article:
 - preserve every fact, figure, quote, date, technical detail, source link, abbreviation, jargon term, and image URL
 - rewrite the article into a compact quick-news bullet digest in Markdown
-- usually use around 3 to 5 bullets, but use fewer or more when needed to keep the important technical information intact
+- output exactly 3 to 5 bullets only
+- combine related details into denser bullets when needed so the article stays within 3 to 5 bullets
+- rewrite the bullets as compact summaries, not a near-verbatim restatement of the source article
 - keep the article in Markdown
 - remove YAML frontmatter and obvious extraction noise
 - keep image markdown near the bullets where it is relevant
@@ -26,6 +28,7 @@ Return exactly one output item per input article.
 Each output item must keep the same source_url as its matching input article.
 The body must not start with a top-level article heading because the caller will add it.
 The body must contain Markdown bullet points rather than prose paragraphs.
+Image lines and Source lines may appear outside the bullets, but the article itself must still contain exactly 3 to 5 bullets.
 Source attribution lines should usually appear after the bullets.
 The final result should read like quick news, not a long-form rewrite.
 """

@@ -12,6 +12,7 @@ from prompts.final_markdown_prompts import FINAL_MARKDOWN_PROMPT
 
 MARKDOWN_BULLET_RE = re.compile(r"^(?:[-*]\s+\S|\d+\.\s+\S)")
 MARKDOWN_HEADING_RE = re.compile(r"^#{1,6}\s+\S")
+MAX_BULLET_LENGTH = 420
 
 
 class FinalMarkdownArticleResult(BaseModel):
@@ -121,6 +122,15 @@ def has_markdown_bullets(markdown_body: str) -> bool:
     return any(MARKDOWN_BULLET_RE.match(line.strip()) for line in markdown_body.splitlines())
 
 
+def extract_bullet_lines(markdown_body: str) -> list[str]:
+    """Return only markdown bullet lines from the composed article body."""
+    return [
+        line.strip()
+        for line in markdown_body.splitlines()
+        if MARKDOWN_BULLET_RE.match(line.strip())
+    ]
+
+
 def contains_markdown_heading(markdown_body: str) -> bool:
     """Return True when the markdown body contains internal headings."""
     return any(MARKDOWN_HEADING_RE.match(line.strip()) for line in markdown_body.splitlines())
@@ -143,6 +153,11 @@ def contains_disallowed_prose(markdown_body: str) -> bool:
     return False
 
 
+def has_overlong_bullet(markdown_body: str) -> bool:
+    """Return True when a bullet line is too long for the compact-news format."""
+    return any(len(line) > MAX_BULLET_LENGTH for line in extract_bullet_lines(markdown_body))
+
+
 def build_article_payload(article: dict) -> dict:
     """Build one prompt payload item with preservation requirements."""
     markdown_content = article["markdown_content"]
@@ -160,10 +175,15 @@ def validate_final_markdown_body(article_input: dict, markdown_body: str) -> str
     cleaned_body = clean_final_markdown_body(markdown_body)
     if not has_markdown_bullets(cleaned_body):
         raise ValueError("The composed article body did not contain Markdown bullet points.")
+    bullet_lines = extract_bullet_lines(cleaned_body)
+    if len(bullet_lines) < 3 or len(bullet_lines) > 5:
+        raise ValueError("The composed article body must contain exactly 3 to 5 bullet points.")
     if contains_markdown_heading(cleaned_body):
         raise ValueError("The composed article body contained internal headings.")
     if contains_disallowed_prose(cleaned_body):
         raise ValueError("The composed article body contained paragraph-style prose blocks.")
+    if has_overlong_bullet(cleaned_body):
+        raise ValueError("The composed article body contained a bullet that was too long.")
 
     normalized_output_lines = {
         normalize_markdown_line(line)

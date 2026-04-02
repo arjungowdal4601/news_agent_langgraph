@@ -12,6 +12,8 @@ MARKDOWN_DIR = Path("scraped_markdown")
 FINAL_MARKDOWN_DIR = Path("final_markdown")
 OUTPUT_DIR = Path("output")
 GRAPH_OUTPUT_DIR = OUTPUT_DIR / "langgraph_diagrams"
+HTML_OUTPUT_DIR = OUTPUT_DIR / "html_reports"
+HTML_REPORT_FILE = HTML_OUTPUT_DIR / "combined_newsletter.html"
 DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})")
 FINAL_MARKDOWN_BATCH_SIZE = 5
 DEFAULT_CUTOFF_DATE = "2026-03-31"
@@ -21,6 +23,7 @@ SITE_URLS = [
     "https://www.spglobal.com/automotive-insights/en",
     "https://www.automotiveworld.com/",
 ]
+
 
 # The semantic router model name is configured from environment variables so it
 # can be changed in a local .env file without editing Python code.

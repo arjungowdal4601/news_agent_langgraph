@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Combined Newsletter Report</title>
+  <style>
+    :root {
+      --bg: #f4efe7;
+      --surface: #fffdfa;
+      --surface-alt: #f7f2ea;
+      --line: #d9cfc3;
+      --text: #1e1c19;
+      --muted: #655d53;
+      --accent: #0a5c5a;
+      --accent-strong: #0a3f3e;
+      --shadow: 0 18px 50px rgba(18, 20, 18, 0.08);
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+      --max-width: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(10, 92, 90, 0.12), transparent 28%),
+        linear-gradient(180deg, #f7f2ea 0%, #f4efe7 45%, #efe8df 100%);
+    }
+    a { color: var(--accent-strong); }
+    .page-shell {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+    .hero {
+      background: linear-gradient(135deg, rgba(10, 92, 90, 0.94), rgba(10, 63, 62, 0.96));
+      color: #f5f4ef;
+      border-radius: 32px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow {
+      margin: 0 0 12px;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.78;
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.02;
+      max-width: 12ch;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+      color: rgba(245, 244, 239, 0.88);
+      font-size: 0.96rem;
+    }
+    .hero-meta span {
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+    }
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 16px 0 18px;
+      backdrop-filter: blur(14px);
+    }
+    .site-pill {
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 253, 250, 0.92);
+      border: 1px solid rgba(217, 207, 195, 0.92);
+      color: var(--accent-strong);
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(18, 20, 18, 0.06);
+    }
+    .content-stack {
+      display: grid;
+      gap: 24px;
+      margin-top: 8px;
+    }
+    .site-section {
+      background: rgba(255, 253, 250, 0.94);
+      border: 1px solid rgba(217, 207, 195, 0.9);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 18px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+    .site-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .site-header h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.1;
+    }
+    .site-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .site-meta span {
+      background: var(--surface-alt);
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+    .article-stack {
+      display: grid;
+      gap: 20px;
+    }
+    .article-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-height: 100%;
+    }
+    .article-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(217, 207, 195, 0.72);
+    }
+    .article-header h3 {
+      margin: 0;
+      font-size: clamp(1.28rem, 2.2vw, 1.6rem);
+      line-height: 1.14;
+      max-width: 32ch;
+    }
+    .article-copy {
+      min-width: 0;
+    }
+    .source-button {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      min-width: 112px;
+    }
+    .article-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .article-gallery--single {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .article-gallery-item {
+      margin: 0;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--surface-alt);
+      border: 1px solid var(--line);
+    }
+    .article-gallery-item--full {
+      grid-column: 1 / -1;
+    }
+    .article-gallery-item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      aspect-ratio: 16 / 9;
+    }
+    .article-bullets {
+      margin: 0;
+      padding-left: 20px;
+      display: grid;
+      gap: 12px;
+      line-height: 1.66;
+    }
+    .article-bullets li {
+      max-width: none;
+    }
+    .article-bullets strong {
+      font-weight: 700;
+      color: var(--accent-strong);
+    }
+    .article-bullets em,
+    .article-source-meta em {
+      font-style: italic;
+    }
+    .article-source-meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+      padding-top: 4px;
+      border-top: 1px dashed var(--line);
+    }
+    @media (max-width: 768px) {
+      .page-shell { width: min(var(--max-width), calc(100% - 20px)); }
+      .hero { padding: 24px; border-radius: 24px; }
+      .site-section { padding: 18px; border-radius: 24px; }
+      .article-card { padding: 16px; }
+      .article-gallery {
+        grid-template-columns: 1fr;
+      }
+      .article-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .source-button { width: 100%; }
+      .site-nav {
+        position: static;
+        padding-top: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <section class="hero">
+      <p class="hero-eyebrow">Newsletter Report</p>
+      <h1>Combined Engineering News Brief</h1>
+      <div class="hero-meta">
+        <span>Rendered 2026-04-02 12:27</span>
+        <span>3 site newsletters</span>
+        <span>13 total articles</span>
+      </div>
+    </section>
+    <nav class="site-nav" aria-label="Site navigation">
+      <a class="site-pill" href="#motortrend">Motortrend</a>
+<a class="site-pill" href="#autonews">Autonews</a>
+<a class="site-pill" href="#automotiveworld">Automotiveworld</a>
+    </nav>
+    <div class="content-stack">
+      <section class="site-section" id="motortrend">
+  <div class="site-header">
+    <div>
+      <p class="site-kicker">Motortrend</p>
+      <h2>Motortrend Final Newsletter</h2>
+    </div>
+    <div class="site-meta">
+      <span>3 articles</span>
+      <span>Generated 2026-04-02</span>
+    </div>
+  </div>
+  <div class="article-stack">
+    <article class="article-card">
+  <div class="article-header">
+    <h3>Best Tech 2026: The Lucid Gravity Proves That Great Fast-Charging Is About More Than Power</h3>
+    <a class="source-button" href="https://www.motortrend.com/features/lucid-gravity-fast-charging-best-tech-2026" target="_blank" rel="noopener noreferrer">Open Source</a>
+  </div>
+  <div class="article-gallery"><figure class="article-gallery-item"><img src="https://hips.hearstapps.com/hmg-prod/images/1c57f4d3-06c3-45da-bc22-9ad6500552c5.jpg?w=768&amp;width=768&amp;q=75&amp;format=webp" alt="" loading="lazy"></figure><figure class="article-gallery-item"><img src="https://hips.hearstapps.com/hmg-prod/images/01f553b3-ce17-4fab-92cb-1afcd59c21e0.jpg?w=768&amp;width=768&amp;q=75&amp;format=webp" alt="" loading="lazy"></figure><figure class="article-gallery-item article-gallery-item--full"><img src="https://hips.hearstapps.com/hmg-prod/images/10437baa-a0a1-4662-8216-94f2ccd6ea17.jpg?w=768&amp;width=768&amp;q=75&amp;format=webp" alt="" loading="lazy"></figure></div>
+  <div class="article-copy">
+    <ul class="article-bullets">
+      <li>Lucid’s engineers had to rethink the Gravity’s charging plan after Tesla opened Supercharger access to competitors in February 2023, by which point Grand Touring development was already about 70% complete; the SUV had been headed toward a 936-volt pack and 400-kW charging on 1,000-volt hardware, but at Tesla’s nearly 18,000 North American Superchargers—mostly 500-volt—the car would have been capped at 50 kW.</li>
+<li>Emad Dlala, Lucid’s senior vice president of engineering and digital, said charging convenience is “almost the number one factor for EV adoption” and that Tesla’s Supercharger network “has made Tesla’s success,” prompting a rapid redesign in weeks rather than months.</li>
+<li>The fix: swap the CCS port for a Tesla-style NACS port, move it from the driver’s-side front to the driver’s rear fender, and ditch the DC-to-DC converter by routing power through the rear motor’s windings to step 500-volt input up to the needed charging voltage.</li>
+<li>That raised peak charging power to 225 kW on Tesla V3 stations, just under their 250-kW max, and helped the Gravity win a 2026 MotorTrend Best Tech award in Public Charging Experience; on the right hardware, the Gravity Grand Touring is MotorTrend’s fastest-charging SUV, adding 194 miles in 15 minutes, while its 400-kW peak comes from Panasonic-developed nickel-manganese-cobalt lithium-ion cells.</li>
+<li>Lucid also tuned charging software using real-world Lucid Air usage data, not just lab testing, to push performance harder without battery damage.</li>
+    </ul>
+    
+  </div>
+</article>
+<article class="article-card">
+  <div class="article-header">
+    <h3>Volkswagen’s 2027 Atlas Looks New—But Is It Actually Better?</h3>
+    <a class="source-button" href="https://www.motortrend.com/news/first-look-2027-volkswagen-atlas-redesign-tech-engine" target="_blank" rel="noopener noreferrer">Open Source</a>
+  </div>
+  
+  <div class="article-copy">
+    <ul class="article-bullets">
+      <li>The 2027 Volkswagen Atlas is riding on an evolution of the MQB (modular transverse) platform with the same wheelbase and a lightly massaged EA888 engine, so it’s not a clean-sheet redesign even though the sheetmetal, interior and electrical architecture are new.</li>
+<li>VW says the updated electrical architecture isn’t the centralized software-defined system Rivian designed for Volkswagen, but it does enable a new set of features and functionality.</li>
+<li>Exterior changes include a longer nose for pedestrian protection, a glossy black grille that can look EV-like, twin light bars with six daytime running lamps per side, illuminated VW logos on all but the base trim, animated approach/depart lighting, and wheel sizes from 18 to 21 inches.</li>
+<li>The Gen 5 turbo-four, first seen in the 2026 Volkswagen Tiguan, is now the Atlas’s most powerful yet at 282 hp and 258 lb-ft, up 13 hp and down 15 lb-ft versus last year; VW says a variable-geometry turbo inlet nozzle, Miller-cycle cam timing, and a more interconnected cooling system trade a slightly lower torque peak for quicker spool, similar performance, and better fuel economy on regular gas.</li>
+    </ul>
+    
+  </div>
+</article>
+<article class="article-card">
+  <div class="article-header">
+    <h3>Here’s What Hyundai’s Boulder Needs to Fight the Jeep Wrangler and Ford Bronco</h3>
+    <a class="source-button" href="https://www.motortrend.com/news/what-2028-hyundai-boulder-needs-fight-rival-jeep-wrangler-ford-bronco" target="_blank" rel="noopener noreferrer">Open Source</a>
+  </div>
+  
+  <div class="article-copy">
+    <ul class="article-bullets">
+      <li>Hyundai’s Boulder is still only a concept, but its reveal at the 2026 New York International Auto Show signals the brand is serious about the U.S. off-road market—and about targeting the Jeep Wrangler and Ford Bronco rather than a pickup like the Ford Ranger.</li>
+<li>The body-on-frame SUV looks on the right track, but MotorTrend says production needs to respect off-road expectations while giving Hyundai room to modernize the formula, since Wrangler/Bronco heritage can be both an asset and a constraint.</li>
+<li>For the base model, MotorTrend wants mechanical simplicity: a naturally aspirated V-6 or turbocharged I-4, a manual transmission, 35-inch tires as a starting point, and true driver-engageable mechanical differential lockers rather than ABS-based substitutes.</li>
+<li>It also wants the Boulder to be a true 4WD SUV with a real transfer case, plus a shifter beside the transmission lever instead of buttons or knobs, to give drivers the mechanical feel and control off-road buyers expect.</li>
+    </ul>
+    
+  </div>
+</article>
+  </div>
+</section>
+<section class="site-section" id="autonews">
+  <div class="site-header">
+    <div>
+      <p class="site-kicker">Autonews</p>
+      <h2>Autonews Final Newsletter</h2>
+    </div>
+    <div class="site-meta">
+      <span>0 articles</span>
+      <span>Generated 2026-04-02</span>
+    </div>
+  </div>
+  <div class="article-stack">
+    
+  </div>
+</section>
+<section class="site-section" id="automotiveworld">
+  <div class="site-header">
+    <div>
+      <p class="site-kicker">Automotiveworld</p>
+      <h2>Automotiveworld Final Newsletter</h2>
+    </div>
+    <div class="site-meta">
+      <span>10 articles</span>
+      <span>Generated 2026-04-02</span>
+    </div>
+  </div>
+  <div class="article-stack">
+    <article class="article-card">
+  <div class="article-header">
+    <h3>Rivian sees “a ton of opportunity” in digital key tech</h3>
+    <a class="source-button" href="https://www.automotiveworld.com/articles/rivian-sees-a-ton-of-opportunity-in-digital-key-tech/" target="_blank" rel="noopener noreferrer">Open Source</a>
+  </div>
+  <div class="article-gallery"><figure class="article-gallery-item"><img src="https://media.automotiveworld.com/app/uploads/2026/03/20143815/BMW-Digital-Key.png" alt="BMW Digital Key" loading="lazy"></figure><figure class="article-gallery-item"><img src="https://media.automotiveworld.com/app/uploads/2026/03/20144326/Rivian-Digital-Key-scaled.png" alt="Rivian Digital Key" loading="lazy"></figure></div>
+  <div class="article-copy">
+    <ul class="article-bullets">
+      <li>Connected vehicles are projected to reach 76 million by 2030 (S&amp;P Global Mobility), and digital access is becoming a key battleground as NFC, BLE and UWB-based systems mature; the core promise is tap-to-lock/unlock/start, remote keyless entry, and secure pass of entry/start.</li>
+<li>Reliability remains the issue: forum users continue to report unlock/start failures, and JD Power’s 2024 China Tech Experience Index Study found digital keys among the top tech drivers of smart-cockpit complaints, with 46% of owners reporting issues.</li>
+<li>CCC Digital Key is aimed at interoperability/security across devices and vehicles; its certification programme launched in late 2023, BMW was the first automaker approved in 2024, and 115 automotive brands were CCC-certified in 2025 versus two in 2024.</li>
+<li>Rivian spent more than 18 months on its CCC-based Digital Key, including nine months of integration/testing with phone makers, and rolled it out in December 2025; Wassym Bensaid says initial surveys show “an extremely high level of satisfaction” and that the tech will matter for VW Group vehicles from 2027, the ID.1, robotaxi authentication, ride-sharing, car rental and granular user profiles.</li>
+<li>CCC’s 2025 Future of Vehicle Connectivity Report says 97% of member companies rate vehicle access as extremely or very important, and the consortium is now looking at fleet management and automated EV charging as next use cases; Bensaid says access to an individual car is “just the beginning.”</li>
+    </ul>
+    
+  </div>
+</article>
+<article class="article-card">
+  <div class="article-header">
+    <h3>International and Ryder launch live autonomous truck pilot</h3>
+    <a class="source-button" href="https://www.automotiveworld.com/news/international-and-ryder-launch-live-autonomous-truck-pilot/" target="_blank" rel="noopener noreferrer">Open Source</a>
+  </div>
+  <div class="article-gallery article-gallery--single"><figure class="article-gallery-item article-gallery-item--full"><img src="https://media.automotiveworld.com/app/uploads/2026/04/01075133/international-motors-autonomous-truck-pilot-ryder-system-1024x683.jpg" alt="" loading="lazy"></figure></div>
+  <div class="article-copy">
+    <ul class="article-bullets">
+      <li>International Motors and Ryder System have launched a live autonomous freight pilot using a factory-integrated autonomous truck in daily service for the first time under International’s fleet trial programme; Ryder, the inaugural customer, is running it on a 600-mile I-35 corridor route between Laredo and Temple, Texas, hauling freight for a Ryder supply chain customer.</li>
+<li>The truck is an International LT Series with the S13 Integrated Powertrain, factory-installed lidar/radar/cameras, and PlusAI’s SuperDrive software; a human safety driver remains onboard, and early results include 100% on-time delivery, 92% autonomous route coverage, pre-trip inspections under 30 minutes, and improved fuel efficiency.</li>
+<li>The trial is designed to validate point-to-point autonomous operations on existing customer infrastructure without dedicated autonomous terminals or hubs, while gathering data on uptime, serviceability and logistics requirements ahead of commercial launch.</li>
+<li>International’s James Cooper says the goal is an end-to-end offering covering vehicles, digital solutions and operational support services; RyderVentures’ Seth deVlugt says operating an AV in an active logistics network with a safety driver validates the tech “where it matters most.”</li>
+    </ul>
+    <p class="article-source-meta">Source: <a href="https://news.international.com/2026-03-31-International-Launches-Level-4-Autonomous-Fleet-Trial-on-Live-Freight-Lane" target="_blank" rel="noopener noreferrer">International Motors</a></p>
+  </div>
+</article>
+<article class="article-card">
+  <div class="article-header">
+    <h3>Volvo Trucks begins road testing hydrogen combustion trucks</h3>
+    <a class="source-button" href="https://www.automotiveworld.com/news/volvo-trucks-begins-road-testing-hydrogen-combustion-trucks/" target="_blank" rel="noopener noreferrer">Open Source</a>
+  </div>
+  <div class="article-gallery article-gallery--single"><figure class="article-gallery-item article-gallery-item--full"><img src="https://media.automotiveworld.com/app/uploads/2026/04/01084341/volvo-truck-hydrogen-powered-truck-1024x683.jpg" alt="" loading="lazy"></figure></div>
+  <div class="article-copy">
+    <ul class="article-bullets">
+      <li>Volvo Trucks has started on-road testing of heavy trucks with hydrogen combustion engines, targeting a commercial launch before 2030; the trucks use Cespira’s HPDI (High Pressure Direct Injection) tech, where a small amount of ignition fuel is injected at high pressure before hydrogen is introduced.</li>
+<li>Volvo says the concept offers higher energy efficiency and greater engine power than conventional hydrogen combustion tech, with range above many customers’ daily driving distance; on green hydrogen plus renewable HVO ignition fuel it can achieve net-zero CO2 well-to-wheel, and under agreed EU CO2 standards it is classified as a zero emission vehicle (ZEV).</li>
+<li>The hydrogen combustion programme sits alongside Volvo Trucks’ battery-electric and fuel cell electric paths; the company also plans low-volume fuel cell electric truck launches before 2030.</li>
+<li>Jan Hjelmgren says customers will be able to operate them “just like diesel trucks,” citing HPDI experience from more than 10,000 gas-powered trucks sold globally.</li>
+    </ul>
+    <p class="article-source-meta">Source: <a href="https://www.volvotrucks.com/en-en/news-stories/press-releases/2026/mar/powerful-and-fuel-efficient---meet-volvo-s-future-hydrogen-truck.html" target="_blank" rel="noopener noreferrer">Volvo Trucks</a></p>
+  </div>
+</article>
+<article class="article-card">
+  <div class="article-header">
+    <h3>Audi introduces torque vectoring world first in RS 5</h3>
+    <a class="source-button" href="https://www.automotiveworld.com/news/audi-introduces-torque-vectoring-world-first-in-rs-5/" target="_blank" rel="noopener noreferrer">Open Source</a>
+  </div>
+  <div class="article-gallery article-gallery--single"><figure class="article-gallery-item article-gallery-item--full"><img src="https://media.automotiveworld.com/app/uploads/2026/04/01084947/audi-rs-5-1024x683.jpg" alt="" loading="lazy"></figure></div>
+  <div class="article-copy">
+    <ul class="article-bullets">
+      <li>Audi says the new RS 5 is the first production model with electromechanical rear-axle torque vectoring; the system, quattro with Dynamic Torque Control, is part of a modular plug-in hybrid drivetrain and can shift up to 2,000 Nm between the rear wheels in 15 milliseconds, independent of drivetrain load.</li>
+<li>The rear transaxle is purpose-built for the RS 5 hybrid drive and includes a water-cooled 400-volt permanent-magnet motor producing 8 kW and 40 Nm as a high-voltage actuator; overdrive gears and a conventional differential with a low lock percentage work with the actuator to route torque individually, including off-throttle and under braking.</li>
+<li>Audi says the HCP1 High-Performance Computing Platform coordinates drivetrain/suspension functions in real time using steering input, vehicle dynamics data and environmental conditions; the system also works with front-axle electronic differential lock, brake torque vectoring and twin-valve adaptive shock absorbers.</li>
+<li>The RS 5 is offered in multiple Audi drive select modes, from neutral and balanced to rear-biased.</li>
+    </ul>
+    <p class="article-source-meta">Source: <a href="https://www.audi-mediacenter.com/en/press-releases/the-new-audi-rs-5-the-first-performance-hybrid-provides-top-driving-dynamics-17064" target="_blank" rel="noopener noreferrer">Audi</a></p>
+  </div>
+</article>
+<article class="article-card">
+  <div class="article-header">
+    <h3>NTSB faults Ford’s ADAS tech in two fatal highway crashes</h3>
+    <a class="source-button" href="https://www.automotiveworld.com/news/ntsb-faults-fords-adas-tech-in-two-fatal-highway-crashes/" target="_blank" rel="noopener noreferrer">Open Source</a>
+  </div>
+  
+  <div class="article-copy">
+    <ul class="article-bullets">
+      <li>The US NTSB says Ford’s BlueCruise failed to mitigate driver distraction in two fatal 2024 crashes and that neither would have been avoided even with the system’s updated version; the 31 March 2026 hearing also pressed the lack of federal performance standards for partial automation.</li>
+<li>The crashes involved 2022 Ford Mustang Mach-E SUVs on BlueCruise on interstate highways in San Antonio (February 2024) and Philadelphia (one month later); both hit stationary cars at highway speed with no braking from driver or system, causing three fatalities.</li>
+<li>NTSB said BlueCruise’s driver monitoring failed to detect inattention, and the system allowed drivers to disable automatic emergency braking and to drive up to 20 mph over the posted limit; Ford said it will take the recommendations under serious consideration, while noting one driver had been impaired by alcohol.</li>
+<li>NHTSA, which has three open BlueCruise investigations, will review the findings; NTSB chair Jennifer Homendy said, “We cannot take a hands-off approach to hands-free driving technology. Lives depend on it.”</li>
+<li>The case adds to NTSB scrutiny of SAE Level 2 systems, where automakers largely set their own monitoring/speed/data-recording rules, and the agency also pointed to its 2023 Tesla Autopilot probe and ongoing Waymo school-bus incidents.</li>
+    </ul>
+    
+  </div>
+</article>
+<article class="article-card">
+  <div class="article-header">
+    <h3>Hanon Systems supplies integrated EV thermal management module | Automotive World</h3>
+    <a class="source-button" href="https://www.automotiveworld.com/news/hanon-systems-supplies-integrated-ev-thermal-management-module/" target="_blank" rel="noopener noreferrer">Open Source</a>
+  </div>
+  <div class="article-gallery article-gallery--single"><figure class="article-gallery-item article-gallery-item--full"><img src="https://media.automotiveworld.com/app/uploads/2026/04/01115225/hanon-systems-hice-module-1024x683.jpg" alt="" loading="lazy"></figure></div>
+  <div class="article-copy">
+    <ul class="article-bullets">
+      <li>Hanon Systems is supplying a highly integrated EV cooling entity first deployed in BMW’s fully electric iX3 SUV; it combines an eCompressor, electronic expansion valve block, water-cooled condenser, internal heat exchanger, chiller, A/C lines, and pressure/temperature sensors into a 16 kg module.</li>
+<li>The module dynamically regulates refrigerant flow and temperature across fast charging, high-performance driving, and extreme weather conditions, aiming to cut system complexity and packaging needs while improving thermal performance, energy utilisation, and driving range.</li>
+<li>Hanon Systems says unifying critical refrigerant thermal management functions into one compact module delivers savings in both packaging and materials, according to CEO Soo Il Lee.</li>
+    </ul>
+    <p class="article-source-meta">Source: <a href="https://www.hanonsystems.com/En/Media/NewsDetails/371" target="_blank" rel="noopener noreferrer">Hanon Systems</a></p>
+  </div>
+</article>
+<article class="article-card">
+  <div class="article-header">
+    <h3>ThunderX adopts SAFERTOS for AI domain controller platforms | Automotive World</h3>
+    <a class="source-button" href="https://www.automotiveworld.com/news/thunderx-adopts-safertos-for-ai-domain-controller-platforms/" target="_blank" rel="noopener noreferrer">Open Source</a>
+  </div>
+  
+  <div class="article-copy">
+    <ul class="article-bullets">
+      <li>ThunderX has adopted SAFERTOS, WHIS’s pre-certified real-time operating system, across next-gen domain controller platforms based on Qualcomm SA8775P and SA8650P SoCs to reinforce functional safety and real-time performance in AI-driven SDV architectures.</li>
+<li>SAFERTOS runs on safety-critical subsystems in ThunderX’s AIBOX central compute platform for cockpit/ADAS fusion, AI perception, and cross-domain orchestration; it is pre-certified to ISO 26262 and provides deterministic task execution.</li>
+<li>The OS spans two products: RazorDCX Tarkine on SA8775P, billed as the first single-SoC cockpit-driver fusion domain controller, and RazorDCX Pantanal on SA8650P for entry-level through flagship vehicle applications.</li>
+<li>ThunderX says the shared functional-safety software foundation lets OEMs keep a unified development approach while tailoring performance and cost to different markets; Dongchao Xu said SAFERTOS strengthens deterministic real-time and safety for safety-critical components and helps scale AI-driven cockpit-ADAS fusion with reduced integration complexity and faster production.</li>
+<li>WHIS’s Andrew Longhurst said SAFERTOS delivers safety and predictability where milliseconds matter, helping OEMs meet demanding automotive standards.</li>
+    </ul>
+    <p class="article-source-meta">Source: <a href="https://www.prnewswire.com/news-releases/thunderx-adopts-safertos-to-enhance-functional-safety-in-next-generation-ai-domain-controller-platforms-to-accelerate-safe-scalable-cockpit-adas-fusion-on-qualcomm-automotive-socs-302729748.html" target="_blank" rel="noopener noreferrer">PR Newswire</a></p>
+  </div>
+</article>
+<article class="article-card">
+  <div class="article-header">
+    <h3>Ettifos validates V2X tolling with Audi and Kapsch | Automotive World</h3>
+    <a class="source-button" href="https://www.automotiveworld.com/news/ettifos-validates-v2x-tolling-with-audi-and-kapsch/" target="_blank" rel="noopener noreferrer">Open Source</a>
+  </div>
+  
+  <div class="article-copy">
+    <ul class="article-bullets">
+      <li>Ettifos completed real-world V2X tolling demos in North Carolina with Audi and Kapsch TrafficCom, validating interoperable, standards-based communication between its V2X-AIR onboard unit (OBU) and Kapsch’s commercially deployed roadside units (RSUs); the demos ran on 26 March at the OmniAir Consortium V2X Tolling Workshop.</li>
+<li>One scenario used an Audi vehicle with Ettifos’ V2X-AIR OBU, maintaining PC5-based comms through a tolling zone with transaction acknowledgements shown on the in-vehicle screen.</li>
+<li>A second demo used a dashboard-mounted aftermarket version of the same OBU, processing tolling events and Traveler Information Messages in real time via Ettifos’ application interface; Ettifos says this model is aimed at retrofitting existing fleets ahead of broader OEM integration.</li>
+<li>The company said both tests confirmed multi-vendor interoperability across Audi vehicles, its aftermarket OBU, and Kapsch roadside infrastructure under live conditions; the V2X-AIR unit is Build America, Buy America (BABA) compliant for federally funded US infrastructure projects.</li>
+<li>Hojun Kim said the collaboration shows interoperability is key to scalable V2X tolling across the ecosystem, while OmniAir’s Jason Conley said joint industry demos like this are critical to scale deployment.</li>
+    </ul>
+    <p class="article-source-meta">Source: <a href="https://www.ettifos.com/post/ettifos-successfully-showcases-interoperable-v2x-tolling-with-audi-and-kapsch" target="_blank" rel="noopener noreferrer">Ettifos</a></p>
+  </div>
+</article>
+<article class="article-card">
+  <div class="article-header">
+    <h3>eSOL launches industrial 3D engine for HMI and ADAS use | Automotive World</h3>
+    <a class="source-button" href="https://www.automotiveworld.com/news/esol-launches-industrial-3d-engine-for-hmi-and-adas-use/" target="_blank" rel="noopener noreferrer">Open Source</a>
+  </div>
+  <div class="article-gallery article-gallery--single"><figure class="article-gallery-item article-gallery-item--full"><img src="https://media.automotiveworld.com/app/uploads/2026/04/01151335/esol-exrp-3d-engine-godot-game-engine-1024x531.jpg" alt="" loading="lazy"></figure></div>
+  <div class="article-copy">
+    <ul class="article-bullets">
+      <li>eSOL launched eXRP, a real-time 3D engine built on the open-source Godot game engine for industrial visualisation uses including cockpit HMI development, ADAS and autonomous-driving scenario verification, and digital twin simulation; it says this is the first real-time 3D engine adapted from a game-engine base for industrial-grade quality and long-term support.</li>
+<li>The tool targets cases where conventional CAE tools are seen as too costly or complex, and its runtime/editor/integrated UI/UX environment is intended to cut development time and resources; eSOL cites an in-vehicle HMI market of US$25-30bn today, rising to US$47-65bn by 2030.</li>
+<li>eSOL has a strategic partnership with W4 Games Limited to support 2D/3D industrial app development, and a joint project with Tadano Infrastructure Solutions to build a 3D LiDAR point cloud simulator with eXRP is already under way ahead of commercialisation.</li>
+<li>Masaki Gondo said eXRP is a key component of eSOL’s Full Stack Engineering strategy, covering visualisation fields including simulation and HMI.</li>
+    </ul>
+    <p class="article-source-meta">Source: <a href="https://www.esol.com/press/press_199.html" target="_blank" rel="noopener noreferrer">eSOL</a></p>
+  </div>
+</article>
+<article class="article-card">
+  <div class="article-header">
+    <h3>Faster, simpler, smarter: how ETAS busts the AUTOSAR myth | Automotive World</h3>
+    <a class="source-button" href="https://www.automotiveworld.com/topics/software-defined-vehicle/faster-simpler-smarter-how-etas-busts-the-autosar-myth/" target="_blank" rel="noopener noreferrer">Open Source</a>
+  </div>
+  <div class="article-gallery"><figure class="article-gallery-item"><img src="https://media.automotiveworld.com/app/uploads/2026/03/31122140/Middleware_Visual_RTA-CAR_Verlauf_16_9.jpg" alt="" loading="lazy"></figure><figure class="article-gallery-item"><img src="https://media.automotiveworld.com/app/uploads/2026/03/31122241/rta-car-composition-editor-editor-laptop-graphic-en-etas-241022_res_1600x900.webp" alt="" loading="lazy"></figure></div>
+  <div class="article-copy">
+    <ul class="article-bullets">
+      <li>ETAS’s Darren Buttle argues AUTOSAR Classic’s complexity reputation is overstated; while the standard is often seen as slow and cumbersome, he says it remains valuable for deeply embedded ECU work, especially via ETAS’s RTA-CAR platform.</li>
+<li>Buttle says AUTOSAR’s complexity stems from 25 years of contributions, coverage-first growth, and legacy-migration needs; at its core it solves runtime scheduling, reliable communication, reliable data storage and field diagnostics on bare-metal systems, acting as glue between varied hardware and OEM requirements.</li>
+<li>He says implementation pain comes mainly from configuration scale—hundreds of thousands of elements and little guidance on the right choices—creating a semantic gap that adds time and risk; RTA-CAR aims to close that with faster configuration, code generation and workflow integration.</li>
+<li>ETAS says RTA-CAR can cut build turnaround from about eight hours to a handful of minutes, enabling 20, 30 or even 50 changes per day, while also bringing decades of embedded expertise to guide customers in the right direction.</li>
+<li>The platform’s optimisations target space/time trade-offs, slack-time/RAM balancing, code-generation efficiency and virtual ECU workflows; ETAS says its solutions can be three to four times smaller than competing offerings, and its tooling helps with multicore data exchange, serialisation, mutual exclusion and data-placement timing.</li>
+    </ul>
+    
+  </div>
+</article>
+  </div>
+</section>
+    </div>
+  </main>
+</body>
+</html>

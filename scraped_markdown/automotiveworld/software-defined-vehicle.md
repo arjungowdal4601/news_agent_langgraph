@@ -4,7 +4,7 @@ url: https://www.automotiveworld.com/topics/software-defined-vehicle/
 hostname: automotiveworld.com
 description: Coverage of SDV platforms, ADAS, centralized architectures, vehicle operating systems, cybersecurity, and the shift to software-driven engineering.
 sitename: Automotive World
-date: 2026-04-01
+date: 2026-04-02
 ---
 Latest:
 
@@ -27,8 +27,6 @@ March 31, 2026
 March 31, 2026
 
 March 31, 2026
-
-March 30, 2026
 
 March 30, 2026
 

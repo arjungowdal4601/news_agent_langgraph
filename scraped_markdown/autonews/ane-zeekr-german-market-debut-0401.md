@@ -5,7 +5,7 @@ url: https://www.autonews.com/zeekr/ane-zeekr-german-market-debut-0401/
 hostname: autonews.com
 description: Geely’s Zeekr bets that big price advantages and strong performance characteristics can overcome brand loyalty that keeps rival premium brands from gaining ground on Audi, BMW and Mercedes.
 sitename: Automotive News
-date: 2026-04-01
+date: 2026-04-02
 categories: ['Zeekr']
 ---
 Why Zeekr thinks it can crack Europe’s premium market where others failed
