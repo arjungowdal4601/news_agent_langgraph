@@ -1,0 +1,77 @@
+{
+  "site_name": "autonews",
+  "cutoff_date": "2026-04-10",
+  "top_sitemap_path": "C:\\Users\\user\\Desktop\\news_agent_langgraph\\output\\download_xml\\autonews.xml",
+  "sitemapindex_nodes_traversed": 1,
+  "urlset_nodes_traversed": 7,
+  "child_sitemaps_seen": 10000,
+  "child_sitemaps_opened": 7,
+  "child_sitemaps_skipped_before_cutoff": 9993,
+  "child_sitemap_samples_opened_recent_lastmod": [],
+  "child_sitemap_samples_skipped_before_cutoff": [
+    {
+      "child_url": "https://www.autonews.com/arc/outboundfeeds/sitemap/latest/?outputType=xml",
+      "parent_lastmod": "",
+      "effective_date": ""
+    },
+    {
+      "child_url": "https://www.autonews.com/arc/outboundfeeds/sitemap3/2026-04-09/?outputType=xml",
+      "parent_lastmod": "",
+      "effective_date": "2026-04-09"
+    },
+    {
+      "child_url": "https://www.autonews.com/arc/outboundfeeds/sitemap3/2026-04-08/?outputType=xml",
+      "parent_lastmod": "",
+      "effective_date": "2026-04-08"
+    },
+    {
+      "child_url": "https://www.autonews.com/arc/outboundfeeds/sitemap3/2026-04-07/?outputType=xml",
+      "parent_lastmod": "",
+      "effective_date": "2026-04-07"
+    },
+    {
+      "child_url": "https://www.autonews.com/arc/outboundfeeds/sitemap3/2026-04-06/?outputType=xml",
+      "parent_lastmod": "",
+      "effective_date": "2026-04-06"
+    },
+    {
+      "child_url": "https://www.autonews.com/arc/outboundfeeds/sitemap3/2026-04-05/?outputType=xml",
+      "parent_lastmod": "",
+      "effective_date": "2026-04-05"
+    },
+    {
+      "child_url": "https://www.autonews.com/arc/outboundfeeds/sitemap3/2026-04-04/?outputType=xml",
+      "parent_lastmod": "",
+      "effective_date": "2026-04-04"
+    },
+    {
+      "child_url": "https://www.autonews.com/arc/outboundfeeds/sitemap3/2026-04-03/?outputType=xml",
+      "parent_lastmod": "",
+      "effective_date": "2026-04-03"
+    },
+    {
+      "child_url": "https://www.autonews.com/arc/outboundfeeds/sitemap3/2026-04-02/?outputType=xml",
+      "parent_lastmod": "",
+      "effective_date": "2026-04-02"
+    },
+    {
+      "child_url": "https://www.autonews.com/arc/outboundfeeds/sitemap3/2026-04-01/?outputType=xml",
+      "parent_lastmod": "",
+      "effective_date": "2026-04-01"
+    }
+  ],
+  "final_urls_seen": 146,
+  "final_urls_kept": 146,
+  "final_urls_skipped_before_cutoff": 0,
+  "final_url_samples_skipped_before_cutoff": [],
+  "guard_rows_removed_after_walk": 0,
+  "guard_rows_removed_samples": [],
+  "kept_min_lastmod": "2026-04-10",
+  "kept_max_lastmod": "2026-04-16",
+  "extractor_source": "fallback",
+  "extractor_sample_hash": "",
+  "extractor_generation_model": "",
+  "extractor_runtime_ms": 0,
+  "fetch_count": 0,
+  "extractor_failure_reason": ""
+}

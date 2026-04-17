@@ -1,0 +1,118 @@
+{
+  "site_name": "automotiveworld",
+  "cutoff_date": "2026-04-10",
+  "top_sitemap_path": "C:\\Users\\user\\Desktop\\news_agent_langgraph\\output\\download_xml\\automotiveworld.xml",
+  "sitemapindex_nodes_traversed": 1,
+  "urlset_nodes_traversed": 7,
+  "child_sitemaps_seen": 118,
+  "child_sitemaps_opened": 7,
+  "child_sitemaps_skipped_before_cutoff": 111,
+  "child_sitemap_samples_opened_recent_lastmod": [],
+  "child_sitemap_samples_skipped_before_cutoff": [
+    {
+      "child_url": "https://www.automotiveworld.com/post-sitemap2.xml",
+      "parent_lastmod": "2010-06-30T11:26:11+00:00",
+      "effective_date": "2010-06-30"
+    },
+    {
+      "child_url": "https://www.automotiveworld.com/post-sitemap3.xml",
+      "parent_lastmod": "2010-09-27T09:14:33+00:00",
+      "effective_date": "2010-09-27"
+    },
+    {
+      "child_url": "https://www.automotiveworld.com/post-sitemap4.xml",
+      "parent_lastmod": "2010-12-22T11:50:51+00:00",
+      "effective_date": "2010-12-22"
+    },
+    {
+      "child_url": "https://www.automotiveworld.com/post-sitemap5.xml",
+      "parent_lastmod": "2011-03-25T13:45:17+00:00",
+      "effective_date": "2011-03-25"
+    },
+    {
+      "child_url": "https://www.automotiveworld.com/post-sitemap6.xml",
+      "parent_lastmod": "2011-06-22T12:07:50+00:00",
+      "effective_date": "2011-06-22"
+    },
+    {
+      "child_url": "https://www.automotiveworld.com/post-sitemap7.xml",
+      "parent_lastmod": "2011-09-13T08:12:27+00:00",
+      "effective_date": "2011-09-13"
+    },
+    {
+      "child_url": "https://www.automotiveworld.com/post-sitemap8.xml",
+      "parent_lastmod": "2011-11-22T10:44:57+00:00",
+      "effective_date": "2011-11-22"
+    },
+    {
+      "child_url": "https://www.automotiveworld.com/post-sitemap9.xml",
+      "parent_lastmod": "2012-02-07T13:05:13+00:00",
+      "effective_date": "2012-02-07"
+    },
+    {
+      "child_url": "https://www.automotiveworld.com/post-sitemap10.xml",
+      "parent_lastmod": "2012-04-19T10:17:45+00:00",
+      "effective_date": "2012-04-19"
+    },
+    {
+      "child_url": "https://www.automotiveworld.com/post-sitemap11.xml",
+      "parent_lastmod": "2012-06-27T09:20:37+00:00",
+      "effective_date": "2012-06-27"
+    }
+  ],
+  "final_urls_seen": 2243,
+  "final_urls_kept": 121,
+  "final_urls_skipped_before_cutoff": 2122,
+  "final_url_samples_skipped_before_cutoff": [
+    {
+      "link": "https://www.automotiveworld.com/articles/80169-china-china-yuchai-updates-on-shares-sale-in-thakral/",
+      "lastmod": "2010-01-04T05:50:38+00:00"
+    },
+    {
+      "link": "https://www.automotiveworld.com/articles/80171-india-ashok-leyland-nissan-to-go-with-own-brands/",
+      "lastmod": "2010-01-04T07:57:29+00:00"
+    },
+    {
+      "link": "https://www.automotiveworld.com/articles/80172-israel-fourth-quarter-sales-nearly-double/",
+      "lastmod": "2010-01-04T08:22:34+00:00"
+    },
+    {
+      "link": "https://www.automotiveworld.com/articles/80174-us-chrysler-launches-coming-home-campaign/",
+      "lastmod": "2010-01-04T09:04:14+00:00"
+    },
+    {
+      "link": "https://www.automotiveworld.com/articles/80176-us-nhtsa-considers-prius-brake-probe/",
+      "lastmod": "2010-01-04T09:13:45+00:00"
+    },
+    {
+      "link": "https://www.automotiveworld.com/articles/80177-china-vehicle-subsidy-raise-comes-into-effect/",
+      "lastmod": "2010-01-04T09:23:16+00:00"
+    },
+    {
+      "link": "https://www.automotiveworld.com/articles/80178-czech-republic-avia-ashok-leyland-sales-output-fall/",
+      "lastmod": "2010-01-04T09:37:46+00:00"
+    },
+    {
+      "link": "https://www.automotiveworld.com/articles/80179-india-ashok-leyland-unveils-new-platform-u-truck/",
+      "lastmod": "2010-01-04T09:52:12+00:00"
+    },
+    {
+      "link": "https://www.automotiveworld.com/articles/80180-south-korea-hyundai-kia-target-17-growth-in-2010/",
+      "lastmod": "2010-01-04T09:52:57+00:00"
+    },
+    {
+      "link": "https://www.automotiveworld.com/articles/80181-china-gm-s-2009-china-sales-rise-67/",
+      "lastmod": "2010-01-04T10:24:57+00:00"
+    }
+  ],
+  "guard_rows_removed_after_walk": 0,
+  "guard_rows_removed_samples": [],
+  "kept_min_lastmod": "2026-04-10",
+  "kept_max_lastmod": "2026-04-16",
+  "extractor_source": "fallback",
+  "extractor_sample_hash": "",
+  "extractor_generation_model": "",
+  "extractor_runtime_ms": 0,
+  "fetch_count": 0,
+  "extractor_failure_reason": ""
+}

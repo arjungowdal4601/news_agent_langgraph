@@ -1,0 +1,20 @@
+---
+title: U.S. total vehicle sales by make, Q1 2026
+url: https://www.autonews.com/data-center/sales-data/an-us-total-vehicle-sales-by-make-q1-2026/
+hostname: autonews.com
+description: Unit sales and market share of cars and light trucks in the U.S. by brand, ranked by quarterly and year-to-date sales for the current year
+sitename: Automotive News
+date: 2026-04-13
+categories: ['Sales Data']
+---
+April 13, 2026 12:31 PM EDT
+
+## Featured Stories
+
+[The biggest gainers and decliners on our top 150 dealership groups list](https://www.autonews.com/retail/top-150-dealership-groups/an-2026-top-150-dealership-groups-list-highlights-0412/)
+
+The top 150’s overall sales and share of sales in the U.S. grew in 2025.
+
+April 13, 2026 12:31 PM EDT
+
+The top 150’s overall sales and share of sales in the U.S. grew in 2025.

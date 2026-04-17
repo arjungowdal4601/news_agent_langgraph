@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m py_compile constants.py state.py main.py nodes/sitemap_nodes.py nodes/sitemap_extractor_agent_node.py services/sitemap_extractor_agent_service.py prompts/sitemap_extractor_prompts.py)",
+      "Bash(python -c ':*)",
+      "Bash(mv download_xml output/download_xml)",
+      "Bash(mv extracted_urls output/extracted_urls)",
+      "Bash(mv scraped_markdown output/scraped_markdown)"
+    ]
+  }
+}

@@ -9,6 +9,7 @@ from constants import DEFAULT_CUTOFF_DATE, SITE_URLS
 from nodes.final_markdown_nodes import compose_final_markdown
 from nodes.markdown_nodes import download_markdown_from_excel
 from nodes.semantic_router_nodes import semantic_router_from_excel
+from nodes.sitemap_extractor_agent_node import generate_sitemap_extractor
 from nodes.sitemap_nodes import download_xml, extract_urls_to_excel
 from prompts.semantic_router_prompts import USER_NEED
 from services.pipeline_runner_service import run_all_sites
@@ -17,13 +18,15 @@ from state import PipelineState
 builder = StateGraph(PipelineState)
 
 builder.add_node("download_xml", download_xml)
+builder.add_node("generate_sitemap_extractor", generate_sitemap_extractor)
 builder.add_node("extract_urls_to_excel", extract_urls_to_excel)
 builder.add_node("download_markdown_from_excel", download_markdown_from_excel)
 builder.add_node("semantic_router_from_excel", semantic_router_from_excel)
 builder.add_node("compose_final_markdown", compose_final_markdown)
 
 builder.add_edge(START, "download_xml")
-builder.add_edge("download_xml", "extract_urls_to_excel")
+builder.add_edge("download_xml", "generate_sitemap_extractor")
+builder.add_edge("generate_sitemap_extractor", "extract_urls_to_excel")
 builder.add_edge("extract_urls_to_excel", "download_markdown_from_excel")
 builder.add_edge("download_markdown_from_excel", "semantic_router_from_excel")
 builder.add_edge("semantic_router_from_excel", "compose_final_markdown")

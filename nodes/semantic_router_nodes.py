@@ -36,6 +36,7 @@ def semantic_router_from_excel(state: PipelineState) -> dict:
 
     link_col = header_map["link"]
     markdown_path_col = header_map["markdown_path"]
+    markdown_status_col = header_map["markdown_status"]
     similarity_score_col = header_map["similarity_score"]
     semantic_status_col = header_map["semantic_status"]
     semantic_reason_col = header_map["semantic_reason"]
@@ -46,16 +47,43 @@ def semantic_router_from_excel(state: PipelineState) -> dict:
             markdown_path = str(
                 worksheet.cell(row=row_number, column=markdown_path_col).value or ""
             ).strip()
+            markdown_status = str(
+                worksheet.cell(row=row_number, column=markdown_status_col).value or ""
+            ).strip()
 
             if not markdown_path:
-                update_similarity_score(worksheet, row_number, similarity_score_col, "")
-                update_semantic_status(worksheet, row_number, semantic_status_col, "source_missing")
-                update_semantic_reason(
-                    worksheet,
-                    row_number,
-                    semantic_reason_col,
-                    "Markdown path is missing.",
-                )
+                if markdown_status == "published_before_cutoff":
+                    update_similarity_score(worksheet, row_number, similarity_score_col, 0)
+                    update_semantic_status(worksheet, row_number, semantic_status_col, "not_selected")
+                    update_semantic_reason(
+                        worksheet,
+                        row_number,
+                        semantic_reason_col,
+                        "Skipped because the page published date is before the cutoff.",
+                    )
+                elif markdown_status == "published_date_missing":
+                    update_similarity_score(worksheet, row_number, similarity_score_col, 0)
+                    update_semantic_status(worksheet, row_number, semantic_status_col, "not_selected")
+                    update_semantic_reason(
+                        worksheet,
+                        row_number,
+                        semantic_reason_col,
+                        "Skipped because the page published date could not be verified.",
+                    )
+                else:
+                    update_similarity_score(worksheet, row_number, similarity_score_col, "")
+                    update_semantic_status(
+                        worksheet,
+                        row_number,
+                        semantic_status_col,
+                        "source_missing",
+                    )
+                    update_semantic_reason(
+                        worksheet,
+                        row_number,
+                        semantic_reason_col,
+                        "Markdown path is missing.",
+                    )
                 save_workbook(workbook, excel_path)
                 continue
 

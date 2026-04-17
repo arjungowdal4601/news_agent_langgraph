@@ -1,9 +1,11 @@
+import shutil
+from pathlib import Path
 from typing import Any, Iterable
 
 from langchain_core.runnables.graph import MermaidDrawMethod
 from langchain_core.runnables.graph_mermaid import draw_mermaid_png
 
-from constants import GRAPH_OUTPUT_DIR
+from constants import DOWNLOAD_DIR, EXCEL_DIR, FINAL_MARKDOWN_DIR, GRAPH_OUTPUT_DIR, MARKDOWN_DIR
 from services.path_service import get_site_name
 
 DEFAULT_GRAPH_MERMAID = """flowchart TD
@@ -53,8 +55,32 @@ def save_langgraph_diagram(graph: Any, site_name: str) -> str:
     return str(diagram_path.resolve())
 
 
+def reset_site_outputs(base_url: str) -> None:
+    """Delete generated outputs for one site before rerunning the pipeline.
+
+    This keeps cutoff-date behavior accurate across reruns by preventing old
+    markdown, workbook, and final newsletter files from surviving in the site
+    folders.
+    """
+    site_name = get_site_name(base_url)
+
+    xml_file_path = DOWNLOAD_DIR / f"{site_name}.xml"
+    site_excel_dir = EXCEL_DIR / site_name
+    site_markdown_dir = MARKDOWN_DIR / site_name
+    site_final_markdown_dir = FINAL_MARKDOWN_DIR / site_name
+
+    if xml_file_path.exists():
+        xml_file_path.unlink()
+
+    for directory in [site_excel_dir, site_markdown_dir, site_final_markdown_dir]:
+        if directory.exists():
+            shutil.rmtree(directory)
+
+
 def run_site(graph: Any, base_url: str, cutoff_date: str, user_need: str) -> dict:
     """Run the single-site graph once and save the flow diagram artifact."""
+    reset_site_outputs(base_url)
+
     result = graph.invoke(
         {
             "base_url": base_url,

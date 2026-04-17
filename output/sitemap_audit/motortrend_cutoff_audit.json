@@ -1,0 +1,124 @@
+{
+  "site_name": "motortrend",
+  "cutoff_date": "2026-04-10",
+  "top_sitemap_path": "C:\\Users\\user\\Desktop\\news_agent_langgraph\\output\\download_xml\\motortrend.xml",
+  "sitemapindex_nodes_traversed": 1,
+  "urlset_nodes_traversed": 6,
+  "child_sitemaps_seen": 11,
+  "child_sitemaps_opened": 6,
+  "child_sitemaps_skipped_before_cutoff": 5,
+  "child_sitemap_samples_opened_recent_lastmod": [
+    {
+      "child_url": "https://www.motortrend.com/en/sitemaps/vehicle-category.2025-09-23T20:50:05.xml.gz",
+      "parent_lastmod": "2026-04-16T19:50:10Z",
+      "effective_date": "2026-04-16"
+    },
+    {
+      "child_url": "https://www.motortrend.com/en/sitemaps/content.2025-09-18T08:05:12.xml.gz",
+      "parent_lastmod": "2026-04-16T23:40:10Z",
+      "effective_date": "2026-04-16"
+    },
+    {
+      "child_url": "https://www.motortrend.com/en/sitemaps/section.2025-07-15T14:48:15.xml.gz",
+      "parent_lastmod": "2026-04-16T14:08:09Z",
+      "effective_date": "2026-04-16"
+    },
+    {
+      "child_url": "https://www.motortrend.com/en/sitemaps/vehicle-model.2025-08-21T00:59:54.xml.gz",
+      "parent_lastmod": "2026-04-17T00:39:56Z",
+      "effective_date": "2026-04-17"
+    },
+    {
+      "child_url": "https://www.motortrend.com/en/sitemaps/content.2025-08-13T17:24:04.xml.gz",
+      "parent_lastmod": "2026-04-16T16:00:43Z",
+      "effective_date": "2026-04-16"
+    },
+    {
+      "child_url": "https://www.motortrend.com/en/sitemaps/author.2025-09-16T00:03:18.xml.gz",
+      "parent_lastmod": "2026-04-16T21:19:50Z",
+      "effective_date": "2026-04-16"
+    }
+  ],
+  "child_sitemap_samples_skipped_before_cutoff": [
+    {
+      "child_url": "https://www.motortrend.com/en/sitemaps/collection.2025-09-15T21:19:38.xml.gz",
+      "parent_lastmod": "2026-04-01T17:08:14Z",
+      "effective_date": "2026-04-01"
+    },
+    {
+      "child_url": "https://www.motortrend.com/en/sitemaps/vehicle-make.2025-07-17T14:36:21.xml.gz",
+      "parent_lastmod": "2025-11-25T14:36:19Z",
+      "effective_date": "2025-11-25"
+    },
+    {
+      "child_url": "https://www.motortrend.com/en/sitemaps/content-tag.2025-10-23T15:36:28.xml.gz",
+      "parent_lastmod": "2025-12-09T15:47:49Z",
+      "effective_date": "2025-12-09"
+    },
+    {
+      "child_url": "https://www.motortrend.com/en/sitemaps/content.2025-09-18T01:24:25.xml.gz",
+      "parent_lastmod": "2026-03-18T18:56:26Z",
+      "effective_date": "2026-03-18"
+    },
+    {
+      "child_url": "https://www.motortrend.com/en/sitemaps/video.2025-10-13T15:11:29.xml.gz",
+      "parent_lastmod": "2025-12-17T15:43:12Z",
+      "effective_date": "2025-12-17"
+    }
+  ],
+  "final_urls_seen": 45473,
+  "final_urls_kept": 77,
+  "final_urls_skipped_before_cutoff": 45396,
+  "final_url_samples_skipped_before_cutoff": [
+    {
+      "link": "https://www.motortrend.com/rankings/convertibles",
+      "lastmod": "2026-01-05T20:50:25Z"
+    },
+    {
+      "link": "https://www.motortrend.com/rankings/hatchbacks",
+      "lastmod": "2026-01-05T20:58:52Z"
+    },
+    {
+      "link": "https://www.motortrend.com/rankings/hybrid-cars",
+      "lastmod": "2026-02-27T16:16:35Z"
+    },
+    {
+      "link": "https://www.motortrend.com/rankings/luxury-cars",
+      "lastmod": "2026-02-12T20:22:50Z"
+    },
+    {
+      "link": "https://www.motortrend.com/rankings/sedans",
+      "lastmod": "2026-03-26T15:01:36Z"
+    },
+    {
+      "link": "https://www.motortrend.com/rankings/sports-cars",
+      "lastmod": "2026-01-27T16:08:17Z"
+    },
+    {
+      "link": "https://www.motortrend.com/rankings/suvs",
+      "lastmod": "2026-03-11T17:05:45Z"
+    },
+    {
+      "link": "https://www.motortrend.com/rankings/pickup-trucks",
+      "lastmod": "2026-03-06T14:44:55Z"
+    },
+    {
+      "link": "https://www.motortrend.com/rankings/vans/minivans",
+      "lastmod": "2026-04-01T14:58:45Z"
+    },
+    {
+      "link": "https://www.motortrend.com/rankings/coupes",
+      "lastmod": "2026-01-05T20:59:36Z"
+    }
+  ],
+  "guard_rows_removed_after_walk": 0,
+  "guard_rows_removed_samples": [],
+  "kept_min_lastmod": "2026-04-10",
+  "kept_max_lastmod": "2026-04-17",
+  "extractor_source": "fallback",
+  "extractor_sample_hash": "",
+  "extractor_generation_model": "",
+  "extractor_runtime_ms": 0,
+  "fetch_count": 0,
+  "extractor_failure_reason": ""
+}

@@ -6,17 +6,36 @@ import re
 # ---------------------------
 # Project folders
 # ---------------------------
-DOWNLOAD_DIR = Path("download_xml")
-EXCEL_DIR = Path("extracted_urls")
-MARKDOWN_DIR = Path("scraped_markdown")
-FINAL_MARKDOWN_DIR = Path("final_markdown")
 OUTPUT_DIR = Path("output")
+DOWNLOAD_DIR = OUTPUT_DIR / "download_xml"
+EXCEL_DIR = OUTPUT_DIR / "extracted_urls"
+MARKDOWN_DIR = OUTPUT_DIR / "scraped_markdown"
+FINAL_MARKDOWN_DIR = OUTPUT_DIR / "final_markdown"
 GRAPH_OUTPUT_DIR = OUTPUT_DIR / "langgraph_diagrams"
 HTML_OUTPUT_DIR = OUTPUT_DIR / "html_reports"
 HTML_REPORT_FILE = HTML_OUTPUT_DIR / "combined_newsletter.html"
+SITEMAP_AUDIT_DIR = OUTPUT_DIR / "sitemap_audit"
+SITEMAP_EXTRACTOR_DIR = Path("configs/sitemap_extractors")
 DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})")
 FINAL_MARKDOWN_BATCH_SIZE = 5
-DEFAULT_CUTOFF_DATE = "2026-03-31"
+DEFAULT_CUTOFF_DATE = "2026-04-10"
+
+# Imports allowed inside generated sitemap extractor scripts. Any other import
+# is rejected by the AST scan in services/sitemap_extractor_agent_service.py.
+SITEMAP_EXTRACTOR_WHITELIST = (
+    "xml.etree.ElementTree",
+    "gzip",
+    "re",
+    "datetime",
+    "urllib.parse",
+)
+
+# When set to a truthy value the extractor agent regenerates the cached script
+# even if the inspection sample hash matches.
+SITEMAP_EXTRACTOR_FORCE_REGENERATE = bool(os.getenv("REGENERATE_EXTRACTORS", ""))
+
+# Hard time bound for executing a generated extractor (seconds).
+SITEMAP_EXTRACTOR_TIMEOUT_SECONDS = 120
 SITE_URLS = [
     "https://www.motortrend.com/",
     "https://www.autonews.com/",

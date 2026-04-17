@@ -10,8 +10,11 @@ from services.excel_service import (
 )
 from services.markdown_service import (
     extract_markdown,
+    extract_page_published_date,
     fetch_webpage,
+    is_on_or_after_cutoff,
     save_markdown_file,
+    should_enforce_published_date_cutoff,
     validate_markdown_result,
 )
 from services.path_service import get_article_slug, get_site_name, to_relative_path
@@ -29,9 +32,12 @@ def download_markdown_from_excel(state: PipelineState) -> dict:
     - success : markdown extracted and saved
     - failed  : fetch/extract raised an error
     - empty   : extraction completed but markdown was empty
+    - published_before_cutoff : skipped because page published date is older than cutoff
+    - published_date_missing : skipped because page published date could not be verified
     """
     excel_path = Path(state["excel_file_path"])
     site_name = get_site_name(state["base_url"])
+    cutoff_date = state["cutoff_date"]
 
     # Create site-specific markdown folder.
     site_markdown_dir = MARKDOWN_DIR / site_name
@@ -56,6 +62,31 @@ def download_markdown_from_excel(state: PipelineState) -> dict:
 
         try:
             downloaded = fetch_webpage(link)
+            if downloaded and should_enforce_published_date_cutoff(site_name):
+                published_date = extract_page_published_date(downloaded, link)
+
+                if published_date is None:
+                    update_markdown_path(worksheet, row_number, markdown_path_col, "")
+                    update_markdown_status(
+                        worksheet,
+                        row_number,
+                        markdown_status_col,
+                        "published_date_missing",
+                    )
+                    save_workbook(workbook, excel_path)
+                    continue
+
+                if not is_on_or_after_cutoff(published_date, cutoff_date):
+                    update_markdown_path(worksheet, row_number, markdown_path_col, "")
+                    update_markdown_status(
+                        worksheet,
+                        row_number,
+                        markdown_status_col,
+                        "published_before_cutoff",
+                    )
+                    save_workbook(workbook, excel_path)
+                    continue
+
             markdown = extract_markdown(downloaded, link) if downloaded else None
             status = validate_markdown_result(downloaded, markdown)
 

@@ -98,7 +98,7 @@ def collect_final_markdowns(_: dict | None = None) -> dict:
 
     if not markdown_paths:
         raise ValueError(
-            "No final markdown files were found under final_markdown/. "
+            f"No final markdown files were found under {FINAL_MARKDOWN_DIR}/. "
             "Run the content pipeline first before rendering the HTML report."
         )
 
