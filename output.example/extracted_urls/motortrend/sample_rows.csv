@@ -1,0 +1,3 @@
+link,lastmod,markdown_path,markdown_status,similarity_score,semantic_status,semantic_reason,final_markdown_path,final_markdown_status
+https://www.motortrend.com/rankings/electric-cars,2026-04-13T13:28:03Z,,published_date_missing,0,not_selected,Skipped because the page published date could not be verified.,,skipped_not_selected
+https://www.motortrend.com/news/first-look-2027-mercedes-benz-eqs-class,2026-04-13T22:01:04Z,output/scraped_markdown/motortrend/first-look-2027-mercedes-benz-eqs-class.md,success,93,selected,"Body has substantial engineering detail on 800V architecture, battery chemistry, two-speed drive unit, and charging/regen limits.",output/final_markdown/motortrend/motortrend_final.md,appended

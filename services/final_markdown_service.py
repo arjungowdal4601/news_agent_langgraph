@@ -1,13 +1,12 @@
 import json
-import os
 import re
 from datetime import date
 from pathlib import Path
 
-from langchain_openai import ChatOpenAI
+from langchain_core.language_models.chat_models import BaseChatModel
 from pydantic import BaseModel, Field
 
-from constants import DEFAULT_OPENAI_MODEL
+from models import get_chat_model
 from prompts.final_markdown_prompts import FINAL_MARKDOWN_PROMPT
 
 MARKDOWN_BULLET_RE = re.compile(r"^(?:[-*]\s+\S|\d+\.\s+\S)")
@@ -33,17 +32,9 @@ class FinalMarkdownBatchResult(BaseModel):
     )
 
 
-def get_final_markdown_model() -> ChatOpenAI:
+def get_final_markdown_model() -> BaseChatModel:
     """Create the chat model used for final newsletter composition."""
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        raise ValueError(
-            "OPENAI_API_KEY is missing. Add it to a .env file in the project root "
-            "or set it in your environment before running the pipeline."
-        )
-
-    model_name = os.getenv("OPENAI_MODEL", DEFAULT_OPENAI_MODEL)
-    return ChatOpenAI(model=model_name, temperature=0, api_key=api_key)
+    return get_chat_model(purpose="composer")
 
 
 def extract_frontmatter_value(markdown_content: str, key: str) -> str:

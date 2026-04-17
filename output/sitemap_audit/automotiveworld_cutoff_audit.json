@@ -110,9 +110,9 @@
   "kept_min_lastmod": "2026-04-10",
   "kept_max_lastmod": "2026-04-16",
   "extractor_source": "fallback",
-  "extractor_sample_hash": "",
-  "extractor_generation_model": "",
+  "extractor_sample_hash": "a53898f36d85",
+  "extractor_generation_model": "gpt-5.4-mini",
   "extractor_runtime_ms": 0,
   "fetch_count": 0,
-  "extractor_failure_reason": ""
+  "extractor_failure_reason": "runtime: __import__ not found"
 }

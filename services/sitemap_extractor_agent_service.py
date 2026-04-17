@@ -22,22 +22,21 @@ from __future__ import annotations
 import ast
 import concurrent.futures
 import hashlib
-import os
 import time
 import xml.etree.ElementTree as ET
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Callable
 
-from langchain_openai import ChatOpenAI
+from langchain_core.language_models.chat_models import BaseChatModel
 from pydantic import BaseModel, Field
 
 from constants import (
-    DEFAULT_OPENAI_MODEL,
     SITEMAP_EXTRACTOR_DIR,
     SITEMAP_EXTRACTOR_TIMEOUT_SECONDS,
     SITEMAP_EXTRACTOR_WHITELIST,
 )
+from models import get_chat_model
 from prompts.sitemap_extractor_prompts import SITEMAP_EXTRACTOR_PROMPT
 
 
@@ -237,15 +236,8 @@ def safe_exec(source: str) -> Callable:
 # ---------------------------------------------------------------------------
 # LLM generation
 # ---------------------------------------------------------------------------
-def _get_extractor_model() -> ChatOpenAI:
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        raise ValueError(
-            "OPENAI_API_KEY is missing. Add it to a .env file in the project root "
-            "or set it in your environment before running the pipeline."
-        )
-    model_name = os.getenv("OPENAI_MODEL", DEFAULT_OPENAI_MODEL)
-    return ChatOpenAI(model=model_name, temperature=0, api_key=api_key)
+def _get_extractor_model() -> BaseChatModel:
+    return get_chat_model(purpose="extractor")
 
 
 def _strip_code_fences(code: str) -> str:
@@ -278,7 +270,15 @@ def generate_extractor_code(site_name: str, sample: str, cutoff_date: date) -> t
     )
 
     code = _strip_code_fences(result.python_code)
-    return code, result.notes.strip(), model.model_name
+    # Different providers expose the model identifier under different attrs
+    # (ChatOpenAI/AzureChatOpenAI: model_name; ChatAnthropic: model). Fall
+    # back gracefully so swapping providers in models.py never breaks here.
+    model_identifier = (
+        getattr(model, "model_name", None)
+        or getattr(model, "model", None)
+        or model.__class__.__name__
+    )
+    return code, result.notes.strip(), str(model_identifier)
 
 
 # ---------------------------------------------------------------------------

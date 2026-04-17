@@ -1,2 +1,5 @@
 .env
 /output_1
+
+# Generated artifacts (the structure is documented in output.example/).
+/output/

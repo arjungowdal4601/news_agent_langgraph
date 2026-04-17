@@ -1,13 +1,12 @@
-import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import urlparse
 
-from langchain_openai import ChatOpenAI
+from langchain_core.language_models.chat_models import BaseChatModel
 from pydantic import BaseModel, Field
 
-from constants import DEFAULT_OPENAI_MODEL
+from models import get_chat_model
 from prompts.semantic_router_prompts import SEMANTIC_ROUTER_PROMPT
 
 
@@ -42,20 +41,9 @@ class SemanticRouterResult(BaseModel):
     reason: str = Field(description="One short reason for the routing decision.")
 
 
-def get_semantic_router_model() -> ChatOpenAI:
+def get_semantic_router_model() -> BaseChatModel:
     """Create the chat model used for semantic routing."""
-    # The OpenAI API key is loaded from environment variables so secrets are not
-    # hardcoded in the source code or committed into the project.
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        raise ValueError(
-            "OPENAI_API_KEY is missing. Add it to a .env file in the project root "
-            "or set it in your environment before running the pipeline."
-        )
-
-    # The model name can be configured with OPENAI_MODEL in .env.
-    model_name = os.getenv("OPENAI_MODEL", DEFAULT_OPENAI_MODEL)
-    return ChatOpenAI(model=model_name, temperature=0, api_key=api_key)
+    return get_chat_model(purpose="router")
 
 
 def normalize_similarity_score(score: int) -> int:
